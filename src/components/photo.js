@@ -23,6 +23,7 @@ export class UnsplashImage extends React.Component {
                 avatar: '',
                 portfolio: '',
             },
+            loading: true,
             // This is used to detect screen orientation,
             // So a portrait oriented image is shown on mobile
             // screen: 'landscape',
@@ -72,6 +73,7 @@ export class UnsplashImage extends React.Component {
 
     fetchImage() {
         const { screen } = this.state
+        this.setState({ loading: true })
         axios.get(c.BASE_URL, {
             headers: { params: { orientation: screen === 'portrait' ? 'portrait' : 'landscape' }, Authorization: `Client-ID ${c.CLIENT_KEY}`}})
             .then(response => {
@@ -89,6 +91,7 @@ export class UnsplashImage extends React.Component {
                 //         portfolio: image.user.portfolio_url,
                 //     }
                 // });
+                this.setState({ loading: false })
             })
             .catch(err => {
                 console.log(`Unable to fetch photos from UNSPLASH: ${err}`)
@@ -103,23 +106,28 @@ export class UnsplashImage extends React.Component {
 
 
     render(){
-        const {image} = this.state
+        const {image, loading} = this.state
         const {id, url, title, author, avatar, portfolio } = image
 
         return (
             <div className='col-center-center'>
-                <div className='image-container' {...u.fakeButtonProps({onClick: this.fetchImage})}>
-                    <m.Image
-                        url={url}
-                        className='fitted-image'
-                        id={id}
-                        alt={title} />
-                </div>
-                <Author
+                {loading ? (<span>Loading</span>) : (
+                    <>
+                    <div className='image-container' {...u.fakeButtonProps({onClick: this.fetchImage})}>
+                        <m.Image
+                            url={url}
+                            className='fitted-image'
+                            id={id}
+                            alt={title} />
+                    </div>
+                    <Author
                     author={author}
                     avatar={avatar}
                     portfolio={portfolio} />
-                <AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
+                    <AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
+                    </>
+                )}
+
             </div>
         )
     }
