@@ -107,7 +107,7 @@ export class UnsplashImage extends React.Component {
         const {id, url, title, author, avatar, portfolio } = image
 
         return (
-            <div >
+            <div className='col-center-center'>
                 <div className='image-container' {...u.fakeButtonProps({onClick: this.fetchImage})}>
                     <m.Image
                         url={url}
@@ -119,6 +119,7 @@ export class UnsplashImage extends React.Component {
                     author={author}
                     avatar={avatar}
                     portfolio={portfolio} />
+                <AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
             </div>
         )
     }
@@ -134,4 +135,12 @@ export function Author ({author, avatar, portfolio}) {
             </a>
         </div>
         )
+}
+
+export function AnimatedButton({buttonText, onClick}){
+    return (
+        <button onClick={onClick} className='animated-button'>
+            <span>{buttonText}</span>
+        </button>
+    )
 }

@@ -11,3 +11,5 @@ export const BASE_URL = 'https://api.unsplash.com/photos/random?query=sport'
 
 export const KEY_CODE_ENTER = 13
 export const KEY_CODE_SPACE = 32
+
+export const BUTTON_TEXT = 'Refresh'

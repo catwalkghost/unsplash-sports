@@ -1,3 +1,33 @@
+// Setting up body font
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.relative {
+  position: relative;
+}
+
+.abs {
+  position: absolute;
+}
+
+.animated {
+  transition: all .35s;
+}
+
 // Atomic styles for display
 .block {
   display: block;
@@ -9,6 +39,18 @@
 
 .fit-contain {
   object-fit: contain;
+}
+
+.rounded-1x {
+  border-radius: $radius;
+}
+
+.rounded-2x {
+  border-radius: 8px;
+}
+
+.rounded-4x {
+  border-radius: 16px;
 }
 
 // Atomic styles for Circle Userpic
@@ -56,4 +98,51 @@
     max-width: 90vw;
     max-height: 80vh;
   }
+}
+
+// Animated Button
+.animated-button {
+  @extend .font-weight-400;
+  @extend .relative;
+  @extend .animated;
+  @extend .block;
+
+  @extend .padding-v-0x5;
+  @extend .padding-h-2;
+  @extend .text-center;
+
+  font-size: 1.25rem;
+  line-height: 1.2;
+
+  appearance: none;
+
+  color: #333;
+  border: 1px solid #333;
+  letter-spacing: 2px;
+}
+
+.animated-button span {
+  @extend .relative;
+  z-index: 2;
+}
+
+.animated-button:after{
+  @extend .abs;
+  @extend .animated;
+
+  top: 0;
+  left: 0;
+  width: 0;
+  content: "";
+
+  height: 100%;
+  background: #ff003b;
+}
+
+.animated-button:hover{
+  color: #fff;
+}
+
+.animated-button:hover:after{
+  width: 100%;
 }
