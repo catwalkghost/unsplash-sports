@@ -36,10 +36,10 @@ export function LoadingIndicator ({loadingText, errorText}) {
     return (
         <div className='col-center-center gaps-v-1'>
             <div className='pulsating' />
-            <span>{loadingText}</span>
-            {!u.isNonEmptyString(errorText) ? null : (
+            {!u.isNonEmptyString(errorText) ?
+                <span>{loadingText}</span> :
                 <span>{`Error: ${errorText}`}</span>
-            )}
+            }
         </div>
     )
 }

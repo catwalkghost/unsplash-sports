@@ -22,9 +22,11 @@ export class UnsplashImage extends React.Component {
                 author: '',
                 avatar: '',
                 portfolio: '',
+                color: '',
             },
             loading: true,
             error: '',
+
             // This is used to detect screen orientation,
             // So a portrait oriented image is shown on mobile
             // screen: 'landscape',
@@ -68,6 +70,7 @@ export class UnsplashImage extends React.Component {
                 author: image.user.name,
                 avatar: image.user.profile_image.medium,
                 portfolio: image.user.portfolio_url,
+                color: image.color,
             }
         })
     }
@@ -98,11 +101,12 @@ export class UnsplashImage extends React.Component {
 
 
     render(){
-        const {image, loading, error} = this.state
-        const {id, url, title, author, avatar, portfolio } = image
+        const {image, loading, error } = this.state
+        const {id, url, title, author, avatar, portfolio, color } = image
 
         return (
-            <div className='col-center-center'>
+            <div className='col-center-center width-100p'
+            style={{ backgroundColor: `${color}`}}>
                 {loading ?
                     <m.LoadingIndicator errorText={error} loadingText={c.LOADING}/> : (
                     <>
