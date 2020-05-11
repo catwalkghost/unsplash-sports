@@ -1,0 +1,52 @@
+@mixin responsive-font($xl, $lg, $md, $sm) {
+  font-size: #{$xl}px;
+
+  @include media-lg {
+    font-size: #{$lg}px;
+  }
+
+  @include media-md {
+    font-size: #{$md}px;
+  }
+
+  @include media-sm {
+    font-size: #{$sm}px;
+  }
+}
+
+// 24-20-18-16
+.font-h2 {
+  @include responsive-font(24, 20, 18, 16)
+}
+
+// 18-18-16-16
+.font-h3 {
+  @include responsive-font(18, 18, 16, 16)
+}
+
+// 16-16-14-14
+.font-h4 {
+  @include responsive-font(16, 16, 14, 14)
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  // Uppercase text needs to be spaced out. Always use em for this
+  letter-spacing: .1em;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}

@@ -1,9 +1,13 @@
+@import './reset';
+@import './variables';
+@import './fonts';
+
 @import './node_modules/stylebox/scss/stylebox'; // Adds handy atomic styles for layout and flexbox
 
 
-@import './fonts';
-@import './variable';
 @import './media-queries';
 @import './mixins'; //Mixins and functions
+
+@import './typography';
 @import './misc'; // Miscellaneous styles
 

@@ -26,40 +26,12 @@ export class UnsplashImage extends React.Component {
             },
             loading: true,
             error: '',
-
-            // This is used to detect screen orientation,
-            // So a portrait oriented image is shown on mobile
-            // screen: 'landscape',
         }
 
         this.setImage = this.setImage.bind(this)
         this.fetchImage = this.fetchImage.bind(this)
 
-        this.isPortrait = this.isPortrait.bind(this)
-        this.setScreen = this.setScreen.bind(this)
     }
-
-    isPortrait()  {
-        const { screen } = this.state
-        return screen === 'portrait'
-    }
-
-    setScreen() {
-        if (window.matchMedia('(orientation: portrait)').matches) {
-            console.log('orientation: portrait')
-            this.setState({
-                screen: 'portrait'
-            })
-        }
-
-        if (window.matchMedia('(orientation: landscape)').matches) {
-            console.log('orientation: landscape')
-            this.setState({
-                screen: 'landscape'
-            })
-        }
-    }
-
 
     setImage(image) {
         this.setState({
@@ -76,10 +48,9 @@ export class UnsplashImage extends React.Component {
     }
 
     fetchImage() {
-        const { screen } = this.state
         this.setState({ loading: true })
         axios.get(c.BASE_URL, {
-            headers: { params: { orientation: screen === 'portrait' ? 'portrait' : 'landscape' }, Authorization: `Client-ID ${c.CLIENT_KEY_3}`}})
+            headers: {Authorization: `Client-ID ${c.CLIENT_KEY_2}`}})
             .then(response => {
                 const {data} = response
                 const image = data
@@ -95,7 +66,6 @@ export class UnsplashImage extends React.Component {
 
 
     componentDidMount() {
-        // window.addEventListener('orientationChange' && 'resize', this.setScreen)
         this.fetchImage()
     }
 
@@ -105,23 +75,28 @@ export class UnsplashImage extends React.Component {
         const {id, url, title, author, avatar, portfolio, color } = image
 
         return (
-            <div className='col-center-center width-100p'
+            <div className='col-center-center width-100p height-100p'
             style={{ backgroundColor: `${color}`}}>
                 {loading ?
                     <m.LoadingIndicator errorText={error} loadingText={c.LOADING}/> : (
                     <>
-                    <div className='image-container' {...u.fakeButtonProps({onClick: this.fetchImage})}>
-                        <m.Image
-                            url={url}
-                            className='fitted-image'
-                            id={id}
-                            alt={title} />
+                    <div className='image-container col-center-center'>
+                        <div {...u.fakeButtonProps({onClick: this.fetchImage})}>
+                            <m.Image
+                                url={url}
+                                className='fitted-image'
+                                id={id}
+                                alt={title} />
+                        </div>
+
+                        <div className='row-between-center width-100p'>
+                            <AuthorBlock
+                                author={author}
+                                avatar={avatar}
+                                portfolio={portfolio} />
+                            <m.AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
+                        </div>
                     </div>
-                    <Author
-                    author={author}
-                    avatar={avatar}
-                    portfolio={portfolio} />
-                    <m.AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
                     </>
                 )}
             </div>
@@ -130,12 +105,12 @@ export class UnsplashImage extends React.Component {
 
 }
 
-export function Author ({author, avatar, portfolio}) {
+export function AuthorBlock ({author, avatar, portfolio}) {
     return (
         <div className='row-start-center'>
-            <a href={portfolio} className='row-start-center gaps-h-1 padding-v-1 padding-h-0x5'>
+            <a href={portfolio} className='row-start-center gaps-h-0x5 padding-v-1 padding-h-0x5 fg-primary'>
                 <m.CircleUserPic url={avatar} size='2.5rem' />
-                <span>{author}</span>
+                <span className='font-h4 text-capitalize'>{author}</span>
             </a>
         </div>
         )
