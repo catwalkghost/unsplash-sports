@@ -24,6 +24,7 @@ export class UnsplashImage extends React.Component {
                 portfolio: '',
             },
             loading: true,
+            error: '',
             // This is used to detect screen orientation,
             // So a portrait oriented image is shown on mobile
             // screen: 'landscape',
@@ -75,26 +76,17 @@ export class UnsplashImage extends React.Component {
         const { screen } = this.state
         this.setState({ loading: true })
         axios.get(c.BASE_URL, {
-            headers: { params: { orientation: screen === 'portrait' ? 'portrait' : 'landscape' }, Authorization: `Client-ID ${c.CLIENT_KEY}`}})
+            headers: { params: { orientation: screen === 'portrait' ? 'portrait' : 'landscape' }, Authorization: `Client-ID ${c.CLIENT_KEY_3}`}})
             .then(response => {
                 const {data} = response
                 const image = data
                 console.log(data)
                 this.setImage(image)
-                // this.setState({
-                //     image: {
-                //         id: image.id,
-                //         url: image.urls.regular,
-                //         title: image.alt_description,
-                //         author: image.user.name,
-                //         avatar: image.user.profile_image.small,
-                //         portfolio: image.user.portfolio_url,
-                //     }
-                // });
                 this.setState({ loading: false })
             })
             .catch(err => {
                 console.log(`Unable to fetch photos from UNSPLASH: ${err}`)
+                this.setState({ loading: true, error: `${err}` })
             })
     }
 
@@ -106,12 +98,13 @@ export class UnsplashImage extends React.Component {
 
 
     render(){
-        const {image, loading} = this.state
+        const {image, loading, error} = this.state
         const {id, url, title, author, avatar, portfolio } = image
 
         return (
             <div className='col-center-center'>
-                {loading ? (<span>Loading</span>) : (
+                {loading ?
+                    <m.LoadingIndicator errorText={error} loadingText={c.LOADING}/> : (
                     <>
                     <div className='image-container' {...u.fakeButtonProps({onClick: this.fetchImage})}>
                         <m.Image
@@ -124,10 +117,9 @@ export class UnsplashImage extends React.Component {
                     author={author}
                     avatar={avatar}
                     portfolio={portfolio} />
-                    <AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
+                    <m.AnimatedButton buttonText={c.BUTTON_TEXT} onClick={this.fetchImage}/>
                     </>
                 )}
-
             </div>
         )
     }
@@ -145,10 +137,3 @@ export function Author ({author, avatar, portfolio}) {
         )
 }
 
-export function AnimatedButton({buttonText, onClick}){
-    return (
-        <button onClick={onClick} className='animated-button'>
-            <span>{buttonText}</span>
-        </button>
-    )
-}

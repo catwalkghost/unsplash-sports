@@ -13,3 +13,5 @@ export const KEY_CODE_ENTER = 13
 export const KEY_CODE_SPACE = 32
 
 export const BUTTON_TEXT = 'Refresh'
+
+export const LOADING = 'Loading'
