@@ -11,6 +11,11 @@ This app shows a random sports related image from Unsplash.
 * Run development app using `yarn start`
 * Run build using `yarn build`
 
+## Components
+The app's basic components, such as Userpic, Image, Button, Loader are located in the `misc.js` file. These are scalable and expandable.
 
-
-
+## External Libraries
+The app uses: 
+* [create-react-app](https://github.com/facebook/create-react-app)
+* [fpx: Functional Programming eXtensions for JavaScript.](https://mitranim.com/fpx/)
+* [stylebox](https://github.com/aristovpro/stylebox)
