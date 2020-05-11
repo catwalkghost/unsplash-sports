@@ -50,7 +50,7 @@ export class UnsplashImage extends React.Component {
     fetchImage() {
         this.setState({ loading: true })
         axios.get(c.BASE_URL, {
-            headers: {Authorization: `Client-ID ${c.CLIENT_KEY_2}`}})
+            headers: {Authorization: `Client-ID ${c.CLIENT_KEY_ENV}`}})
             .then(response => {
                 const {data} = response
                 const image = data
@@ -67,6 +67,7 @@ export class UnsplashImage extends React.Component {
 
     componentDidMount() {
         this.fetchImage()
+        console.log(process.env)
     }
 
 

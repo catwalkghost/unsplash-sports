@@ -1,9 +1,6 @@
 export const TITLE = 'DAZNX Unsplash Image Viewer'
 
-export const CLIENT_KEY = 'g83cdFRg2EBEl2mi9U26-XLfHpu1VlOyAE8pSgbcwKc'
-export const CLIENT_KEY_2 = '76EwEn7VQYFynK8VCT6OTVUCrHPtxh0cE-vZVbWx8ZA'
-export const CLIENT_KEY_3 = 'Oqu6n70Ptj-mQqpoiSm7-cTHTqNlAcJm9c85cz62bHk'
-
+export const CLIENT_KEY_ENV = process.env.REACT_APP_CLIENT_KEY
 
 export const RETINA_SCREEN = window.devicePixelRatio > 1 || (window.matchMedia && window.matchMedia("(-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches)
 
