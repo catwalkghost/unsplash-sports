@@ -1,0 +1,37 @@
+// Media Queries
+@mixin media-xl {
+  @media (max-width: 1360px) {@content;}
+}
+
+@mixin media-lg {
+  @media (max-width: 1024px) {@content;}
+}
+
+@mixin media-md {
+  @media (max-width: $page-breakpoint-md) {@content;}
+}
+
+@mixin media-ls {
+  @media (max-width: 640px) {@content;}
+}
+
+@mixin media-sm {
+  @media (max-width: $page-breakpoint-sm) {@content;}
+}
+
+@mixin media-md-exact {
+  @media screen and (min-width: $page-breakpoint-sm + 1px) and (max-width: $page-breakpoint-md) {@content;}
+}
+
+@mixin media-not-lg {
+  @media not screen and (min-width: $page-breakpoint-md + 1px) {@content;}
+}
+
+@mixin media-not-sm {
+  @media not screen and (max-width: $page-breakpoint-sm) {@content;}
+}
+
+// iPad Pro Portrait
+@mixin media-ipad-pro {
+  @media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {@content}
+}

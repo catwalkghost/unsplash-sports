@@ -1,0 +1,59 @@
+// Atomic styles for display
+.block {
+  display: block;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
+.fit-contain {
+  object-fit: contain;
+}
+
+// Atomic styles for Circle Userpic
+.bg-circle {
+  @include bg-cover-circle;
+}
+
+.bg-circle-trick {
+  @include bg-cover-circle;
+  @include height-percentage-trick(100%);
+}
+
+// Atomic styles for object-fit
+.fitted-image {
+  @extend .width-100p;
+  @extend .fit-cover;
+  width: 70vw;
+  max-width: 70vw;
+  max-height: 70vh;
+
+  @include media-lg {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+}
+
+// Layout
+.layout-container {
+  @extend .row-center-center;
+  @extend .width-100p;
+  @extend .height-100vh;
+}
+
+// Image Container
+.image-container {
+  @extend .col-center-center;
+
+  @include media-not-lg {
+    max-width: 70vw;
+    max-height: 70vh;
+  }
+
+  @include media-lg {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+}
