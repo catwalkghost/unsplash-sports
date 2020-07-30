@@ -1,4 +1,4 @@
-# DAZNX Unsplash Image Viewer
+# Unsplash Sports Image Viewer
 This app shows a random sports related image from Unsplash.
 
 ## Installation
